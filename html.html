@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+
+</head>
+<body>
+ <canvas id="canvas" width="300" height="390"></canvas>
+ <script> function Ball(x,y,xs,ys) {
+ this.x = x;
+ this.y = y;
+ this.xSpeed = xs//-4;
+ this.ySpeed = ys // 5;
+}
+function circle(x, y, radius, fillCircle) {
+ ctx.beginPath();
+ ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+ if (fillCircle) {
+ ctx.fill();
+ } else {
+ ctx.stroke();
+ }
+};
+Ball.prototype.draw = function (color) {
+ ctx.fillStyle=color
+ circle(this.x, this.y, Math.random()*6, true);
+};
+
+Ball.prototype.move = function () {
+ this.x += this.xSpeed;
+ this.y += this.ySpeed;
+};
+Ball.prototype.checkCollision = function () {
+ if (this.x < 0 || this.x > 300) {
+ this.xSpeed = -this.xSpeed;
+ }
+ if (this.y < 0 || this.y > 390) {
+ this.ySpeed = -this.ySpeed;
+ }
+} 
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d"); 
+ var ball = new Ball( 
+ Math.random()*200, 
+ Math.random()*200,
+ Math.random()*10 - 5, 
+ Math.random()*10 - 5 );
+ var eweball = new Ball(   
+ Math.random()*200, 
+ Math.random()*200,
+ Math.random()*10 - 5, 
+ Math.random()*10 - 5 )
+ var ewball = new Ball(   
+ Math.random()*200, 
+ Math.random()*200,
+ Math.random()*10 - 5, 
+ Math.random()*10 - 5 )
+ var weball = new Ball(   
+ Math.random()*200, 
+ Math.random()*200,
+ Math.random()*10 - 5, 
+ Math.random()*10 - 5 )
+ var weweball = new Ball(   
+ Math.random()*200, 
+ Math.random()*200,
+ Math.random()*10 - 5, 
+ Math.random()*10 - 5 )
+ setInterval(function () {
+// ctx.clearRect(0, 0, 300, 390);
+ eweball.draw("00ff00")
+ eweball.move()
+ eweball.checkCollision()
+ ewball.draw("ff0000")
+ ewball.move()
+ ewball.checkCollision()
+ ball.draw("0000ff");
+ ball.move();
+ ball.checkCollision();
+ weball.draw("f0f000")
+ weball.move()
+ weball.checkCollision()
+/* weweball.draw("f0f0f0")
+ weweball.move()
+ weweball.checkCollision()*/
+ ctx.strokeRect(0, 0, 300, 390);
+ }, 0);
+ 
+ </script>
+</body>
+</html>
